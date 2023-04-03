@@ -1,4 +1,4 @@
-module github.com/hashicorp/raft
+module github.com/NahSama/raft-modified
 
 go 1.16
 
