@@ -8,8 +8,6 @@ import (
 	"io"
 	"os"
 	"time"
-
-	"github.com/hashicorp/go-hclog"
 )
 
 // ProtocolVersion is the version of the protocol (which includes RPC messages
@@ -145,6 +143,8 @@ type Config struct {
 	// ProtocolVersionMax for the versions of the protocol that this server
 	// can _understand_.
 	ProtocolVersion ProtocolVersion
+
+	HTTPAddress string
 
 	// HeartbeatTimeout specifies the time in follower state without contact
 	// from a leader before we attempt an election.

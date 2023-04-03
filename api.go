@@ -914,7 +914,7 @@ func (r *Raft) RemovePeer(peer ServerAddress) Future {
 // another configuration entry has been added in the meantime, this request will
 // fail. If nonzero, timeout is how long this server should wait before the
 // configuration change log entry is appended.
-func (r *Raft) AddVoter(id ServerID, address ServerAddress, prevIndex uint64, timeout time.Duration) IndexFuture {
+func (r *Raft) AddVoter(id ServerID, address ServerAddress, HTTPAddress string, prevIndex uint64, timeout time.Duration) IndexFuture {
 	if r.protocolVersion < 2 {
 		return errorFuture{ErrUnsupportedProtocol}
 	}
@@ -923,6 +923,7 @@ func (r *Raft) AddVoter(id ServerID, address ServerAddress, prevIndex uint64, ti
 		command:       AddVoter,
 		serverID:      id,
 		serverAddress: address,
+		HTTPAddress:   HTTPAddress,
 		prevIndex:     prevIndex,
 	}, timeout)
 }
@@ -932,7 +933,7 @@ func (r *Raft) AddVoter(id ServerID, address ServerAddress, prevIndex uint64, ti
 // elections or log entry commitment. If the server is already in the cluster,
 // this updates the server's address. This must be run on the leader or it will
 // fail. For prevIndex and timeout, see AddVoter.
-func (r *Raft) AddNonvoter(id ServerID, address ServerAddress, prevIndex uint64, timeout time.Duration) IndexFuture {
+func (r *Raft) AddNonvoter(id ServerID, address ServerAddress, HTTPAddress string, prevIndex uint64, timeout time.Duration) IndexFuture {
 	if r.protocolVersion < 3 {
 		return errorFuture{ErrUnsupportedProtocol}
 	}
@@ -941,6 +942,7 @@ func (r *Raft) AddNonvoter(id ServerID, address ServerAddress, prevIndex uint64,
 		command:       AddNonvoter,
 		serverID:      id,
 		serverAddress: address,
+		HTTPAddress:   HTTPAddress,
 		prevIndex:     prevIndex,
 	}, timeout)
 }

@@ -69,6 +69,8 @@ type Server struct {
 	ID ServerID
 	// Address is its network address that a transport can contact.
 	Address ServerAddress
+
+	HTTPAddress string
 }
 
 // Configuration tracks which servers are in the cluster, and whether they have
@@ -130,6 +132,7 @@ type configurationChangeRequest struct {
 	command       ConfigurationChangeCommand
 	serverID      ServerID
 	serverAddress ServerAddress // only present for AddVoter, AddNonvoter
+	HTTPAddress   string
 	// prevIndex, if nonzero, is the index of the only configuration upon which
 	// this change may be applied; if another configuration entry has been
 	// added in the meantime, this request will fail.
@@ -234,9 +237,10 @@ func nextConfiguration(current Configuration, currentIndex uint64, change config
 	switch change.command {
 	case AddVoter:
 		newServer := Server{
-			Suffrage: Voter,
-			ID:       change.serverID,
-			Address:  change.serverAddress,
+			Suffrage:    Voter,
+			ID:          change.serverID,
+			Address:     change.serverAddress,
+			HTTPAddress: change.HTTPAddress,
 		}
 		found := false
 		for i, server := range configuration.Servers {
@@ -255,9 +259,10 @@ func nextConfiguration(current Configuration, currentIndex uint64, change config
 		}
 	case AddNonvoter:
 		newServer := Server{
-			Suffrage: Nonvoter,
-			ID:       change.serverID,
-			Address:  change.serverAddress,
+			Suffrage:    Nonvoter,
+			ID:          change.serverID,
+			Address:     change.serverAddress,
+			HTTPAddress: change.HTTPAddress,
 		}
 		found := false
 		for i, server := range configuration.Servers {
