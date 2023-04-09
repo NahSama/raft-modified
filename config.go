@@ -1,10 +1,11 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package raft
+package raft_modified
 
 import (
 	"fmt"
+	"github.com/hashicorp/go-hclog"
 	"io"
 	"os"
 	"time"

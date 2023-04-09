@@ -1,7 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package raft
+package raft_modified
 
 // StableStore is used to provide stable storage
 // of key configurations to ensure safety.

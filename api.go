@@ -1,7 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package raft
+package raft_modified
 
 import (
 	"errors"
@@ -334,7 +334,6 @@ func RecoverCluster(conf *Config, fsm FSM, logs LogStore, stable StableStore,
 	}
 
 	logger := conf.getOrCreateLogger()
-
 	for _, snapshot := range snapshots {
 		var source io.ReadCloser
 		_, source, err = snaps.Open(snapshot.ID)

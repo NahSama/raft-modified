@@ -1,7 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package raft
+package raft_modified
 
 // RPCHeader is a common sub-structure used to pass along protocol version and
 // other information about the cluster. For older Raft implementations before

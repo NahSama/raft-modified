@@ -4,7 +4,7 @@
 //go:build batchtest
 // +build batchtest
 
-package raft
+package raft_modified
 
 func init() {
 	userSnapshotErrorsOnNoData = false
